@@ -4,6 +4,9 @@ on:
   release:
     types: [published]
 
+permissions:
+  contents: write
+
 jobs:
   upload-dmg:
     runs-on: ubuntu-latest
@@ -18,5 +21,3 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           files: openvpn-connect.dmg
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
