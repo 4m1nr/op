@@ -1,0 +1,22 @@
+name: Fetch OpenVPN Connect DMG on Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  upload-dmg:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download OpenVPN Connect DMG
+        run: |
+          curl -L -o openvpn-connect.dmg \
+          https://openvpn.net/downloads/openvpn-connect-v3-macos.dmg
+
+      - name: Upload DMG to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: openvpn-connect.dmg
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
